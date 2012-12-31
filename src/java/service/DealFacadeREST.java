@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -85,4 +86,24 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
         return em;
     }
     
+    // methodes personnalisées
+    /**
+     * findByCategorie
+     * @param id
+     * @return List<Deal>
+     */
+    @GET
+    @Path("categorie/{id}")
+    @Produces({"application/xml", "application/json"})
+    public List<Deal> findByCategorie(@PathParam("id") Integer id )
+    {
+        Query q=em.createNamedQuery("Deal.findByIdCategorie");
+        q.setParameter("idcategorie", id);
+        
+       List<Deal> list = q.getResultList();
+       if(!list.isEmpty())
+           return list;
+    
+    return null;
+    }
 }
