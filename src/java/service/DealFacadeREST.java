@@ -5,11 +5,13 @@
 package service;
 
 import com.rest.ressources.Deal;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -106,4 +108,28 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
     
     return null;
     }
+    
+ /**
+     * Find By Tags
+     * @param tag
+     * @return  List<Deal>
+     */
+    @GET
+    @Path("tags/{tags}")
+    @Produces({"application/xml", "application/json"})
+    public List<Deal> findByTags(@PathParam("tags") String tags){
+        
+        Query q = em.createNamedQuery("Deal.findByTags");
+        q.setParameter("tags", tags);
+        List<Deal> list = q.getResultList();
+        
+        if(!list.isEmpty())
+        {
+            return list;
+        }
+        return null;
+    }
+        
+        
+        
 }
