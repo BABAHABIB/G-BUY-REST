@@ -14,5 +14,5 @@ EQUIPE
 ENCADRE PAR :
 =============
 
-Mounir LALLALI
-Guillaume BOUREL  
+- Mounir LALLALI 
+- Guillaume BOUREL   
