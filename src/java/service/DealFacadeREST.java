@@ -109,11 +109,12 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
     return null;
     }
     
- /**
+     /**
      * Find By Tags
      * @param tag
      * @return  List<Deal>
      */
+    
     @GET
     @Path("tags/{tags}")
     @Produces({"application/xml", "application/json"})
@@ -130,6 +131,26 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
         return null;
     }
         
+          /**
+     * Find By IdPrestataire
+     * @param id
+     * @return  List<Deal>
+     */
+    
+    @GET
+    @Path("prestataire/{id}")
+    @Produces({"application/xml", "application/json"})
+    public List<Deal> findByIdPrestataire(@PathParam("id") Integer id){
         
+        Query q = em.createNamedQuery("Deal.findByIdPrestataire");
+        q.setParameter("prestataire", id);
+        List<Deal> list = q.getResultList();
+        
+        if(!list.isEmpty())
+        {
+            return list;
+        }
+        return null;
+    }   
         
 }
