@@ -6,10 +6,10 @@ Projet réalisé par dosi 2012 - 2013
 EQUIPE
 ======
 
-Nada BABAHABIB
-Anas KHABALI
-Yassin ELMAATAOUI
-Nihad AMARA
+- Nada BABAHABIB 
+- Anas KHABALI 
+- Yassin ELMAATAOUI 
+- Nihad AMARA 
 
 ENCADRE PAR :
 =============
