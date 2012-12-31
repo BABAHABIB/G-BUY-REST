@@ -101,7 +101,7 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
         q.setParameter("idcategorie", id);
         
        List<Deal> list = q.getResultList();
-       if(!list.isEmpty() && list != null)
+       if(!list.isEmpty())
            return list;
     
     return null;
