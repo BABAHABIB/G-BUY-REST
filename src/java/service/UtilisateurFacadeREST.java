@@ -107,7 +107,7 @@ public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
         q.setParameter("email", email);
         q.setParameter("password", password);
         List<Utilisateur> list =  q.getResultList();
-        if(list != null && !list.isEmpty())
+        if(!list.isEmpty())
         {
           return list.get(0);
          }
