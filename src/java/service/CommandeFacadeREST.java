@@ -85,5 +85,25 @@ public class CommandeFacadeREST extends AbstractFacade<Commande> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+         /**
+     * Find By User Id
+     * @param idutilisateur
+     * @return  List<Commande>
+     */
+    @GET
+    @Path("commande/{idutilisateur}")
+    @Produces({"application/xml", "application/json"})
+    public List<Commande> findByUserid(@PathParam("idutilisateur") Integer idutilisateur){
+        Query q = em.createNamedQuery("Commande.findByUserid");
+        q.setParameter("idutilisateur", idutilisateur);
+        List<Commande> list = q.getResultList();
+        
+        if(!list.isEmpty())
+        {
+            return list;
+        }
+        return null;
+    }
   
 }
