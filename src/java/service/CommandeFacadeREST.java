@@ -125,5 +125,22 @@ public class CommandeFacadeREST extends AbstractFacade<Commande> {
         }
         return null;
     }
+    
+                 /**
+     * Find By Deal Id
+     * @param iddeal
+     * @return  List<Commande>
+     */
+    @GET
+    @Path("commande/count/{iddeal}")
+    @Produces("text/plain")
+    public String countByDealid(@PathParam("iddeal") Integer id){
+        Query q = em.createNamedQuery("Commande.findByDealid");
+        q.setParameter("iddeal", id);
+        List<Commande> list = q.getResultList();
+        
+        return String.valueOf( list.size());
+        
+    }
   
 }
