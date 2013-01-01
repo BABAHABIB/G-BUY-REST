@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Anas
+ * @author Anas-Yassine
  */
 @Entity
 @Table(name = "bon_achat")
@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BonAchat.findAll", query = "SELECT b FROM BonAchat b"),
     @NamedQuery(name = "BonAchat.findByIdbonAchat", query = "SELECT b FROM BonAchat b WHERE b.idbonAchat = :idbonAchat"),
     @NamedQuery(name = "BonAchat.findByDateExp", query = "SELECT b FROM BonAchat b WHERE b.dateExp = :dateExp"),
-    @NamedQuery(name = "BonAchat.findByValeur", query = "SELECT b FROM BonAchat b WHERE b.valeur = :valeur")})
+    @NamedQuery(name = "BonAchat.findByValeur", query = "SELECT b FROM BonAchat b WHERE b.valeur = :valeur"),
+    @NamedQuery(name = "BonAchat.findByUserid", query = "SELECT b FROM BonAchat b WHERE b.idutilisateur.idutilisateur = :idutilisateur")
+})
 public class BonAchat implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -3,6 +3,7 @@
   <persistence-unit name="G-BUY-RESTPU" transaction-type="JTA">
     <jta-data-source>mysqlGBUY</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+    </properties>
   </persistence-unit>
 </persistence>

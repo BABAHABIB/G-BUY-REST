@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,7 +21,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Anas
+ * @author Anas-Yassine
  */
 @Stateless
 @Path("bonachats")
@@ -84,5 +85,26 @@ public class BonAchatFacadeREST extends AbstractFacade<BonAchat> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+     /**
+     * Find By User Id
+     * @param idutilisateur
+     * @return  List<BonAchat>
+     */
+    @GET
+    @Path("user/{idutilisateur}")
+    @Produces({"application/xml", "application/json"})
+    public List<BonAchat> findByUserid(@PathParam("idutilisateur") Integer id){
+        Query q = em.createNamedQuery("BonAchat.findByUserid");
+        q.setParameter("idutilisateur", id);
+        List<BonAchat> list = q.getResultList();
+      
+        if(!list.isEmpty())
+        {
+            return list;
+        }
+        return null;
+    }
+    
     
 }
