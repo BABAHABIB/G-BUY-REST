@@ -41,20 +41,21 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Deal.findByTitre", query = "SELECT d FROM Deal d WHERE d.titre = :titre"),
     @NamedQuery(name = "Deal.findByDescription", query = "SELECT d FROM Deal d WHERE d.description = :description"),
     @NamedQuery(name = "Deal.findByPrixHabituel", query = "SELECT d FROM Deal d WHERE d.prixHabituel = :prixHabituel"),
-    @NamedQuery(name = "Deal.findByPrix", query = "SELECT d FROM Deal d WHERE d.prix = :prix"),
+    @NamedQuery(name = "Deal.findByPrix", query = "SELECT d FROM Deal d WHERE d.prix <= :prix"),
     @NamedQuery(name = "Deal.findByDateExp", query = "SELECT d FROM Deal d WHERE d.dateExp = :dateExp"),
     @NamedQuery(name = "Deal.findByDateAjout", query = "SELECT d FROM Deal d WHERE d.dateAjout = :dateAjout"),
     @NamedQuery(name = "Deal.findByConditions", query = "SELECT d FROM Deal d WHERE d.conditions = :conditions"),
     @NamedQuery(name = "Deal.findByImage", query = "SELECT d FROM Deal d WHERE d.image = :image"),
     @NamedQuery(name = "Deal.findByVideo", query = "SELECT d FROM Deal d WHERE d.video = :video"),
-    @NamedQuery(name = "Deal.findByTags", query = "SELECT d FROM Deal d WHERE d.tags = :tags"),
+    @NamedQuery(name = "Deal.findByTags", query = "SELECT d FROM Deal d WHERE d.tags LIKE :tags"),
     @NamedQuery(name = "Deal.findByAdresse", query = "SELECT d FROM Deal d WHERE d.adresse = :adresse"),
     @NamedQuery(name = "Deal.findByVille", query = "SELECT d FROM Deal d WHERE d.ville = :ville"),
     @NamedQuery(name = "Deal.findByPays", query = "SELECT d FROM Deal d WHERE d.pays = :pays"),
     @NamedQuery(name = "Deal.findByCodePostale", query = "SELECT d FROM Deal d WHERE d.codePostale = :codePostale"),
     @NamedQuery(name = "Deal.findByCadeau", query = "SELECT d FROM Deal d WHERE d.cadeau = :cadeau"),
     @NamedQuery(name = "Deal.findByIdCategorie", query = "SELECT d FROM Deal d WHERE d.categorie.idcategorie = :idcategorie"),
-    @NamedQuery(name = "Deal.findByIdPrestataire", query = "SELECT d FROM Deal d WHERE d.prestataire.idprestataire = :prestataire")
+    @NamedQuery(name = "Deal.findByIdPrestataire", query = "SELECT d FROM Deal d WHERE d.prestataire.idprestataire = :prestataire"),
+    @NamedQuery(name = "Deal.findRatingByDealId", query = "SELECT u FROM Deal d JOIN d.utilisateurCollection u WHERE  d.iddeal = :iddeal")
 })
 public class Deal implements Serializable {
     private static final long serialVersionUID = 1L;

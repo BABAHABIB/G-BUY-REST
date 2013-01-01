@@ -116,12 +116,12 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
      */
     
     @GET
-    @Path("tags/{tags}")
+    @Path("search/{tags}")
     @Produces({"application/xml", "application/json"})
-    public List<Deal> findByTags(@PathParam("tags") String tags){
+    public List<Deal> search(@PathParam("tags") String tags){
         
         Query q = em.createNamedQuery("Deal.findByTags");
-        q.setParameter("tags", tags);
+        q.setParameter("tags", "%"+tags+"%");
         List<Deal> list = q.getResultList();
         
         if(!list.isEmpty())
@@ -152,5 +152,77 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
         }
         return null;
     }   
+    
+    /**
+     * findByVille
+     * @param ville
+     * @return List<Deal>
+     */
+    @GET
+    @Path("ville/{ville}")
+    @Produces({"application/xml", "application/json"})
+    public List<Deal> findByVille(@PathParam("ville") String ville){
+        Query q = em.createNamedQuery("Deal.findByVille");
+        q.setParameter("ville", ville);
+        
+        List<Deal> list = q.getResultList();
+        if(!list.isEmpty()) {
+            return list;
+        }
+        return null;
+    }
+    /**
+     * findByPays
+     * @param pays
+     * @return List<Pays>
+     */
+    @GET
+    @Path("pays/{pays}")
+    @Produces({"application/xml", "application/json"})
+    public List<Deal> findByPays(@PathParam("pays") String pays){
+        Query q = em.createNamedQuery("Deal.findByPays");
+        q.setParameter("pays", pays);
+        
+        List<Deal> list = q.getResultList();
+        if(!list.isEmpty()) {
+            return list;
+        }
+        return null;
+    }
+      
+    /**
+     * findByPrix 
+     * @param prix
+     * @return 
+     */
+    @GET
+    @Path("prix/{prix}")
+    @Produces({"application/xml", "application/json"})
+    public List<Deal> findByPrix(@PathParam("prix") double prix){
+        Query q = em.createNamedQuery("Deal.findByPrix");
+        q.setParameter("prix", prix);
+        
+        List<Deal> list = q.getResultList();
+        if(!list.isEmpty()) {
+            return list;
+        }
+        return null;
+    }
+    
+    /**
+     * countRatingByIddeal
+     * @param id
+     * @return 
+     */
+    @GET
+    @Path("countRating/{iddeal}")
+    @Produces("text/plain")
+    public String countRatingByIdDeal(@PathParam("iddeal") Integer id){
+        Query q = em.createNamedQuery("Deal.findRatingByDealId");
+        q.setParameter("iddeal", id);
+        List<Deal> list = q.getResultList();
+        return String.valueOf(list.size());
+    }
+  
         
 }
