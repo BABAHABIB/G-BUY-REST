@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Commande.findAll", query = "SELECT c FROM Commande c"),
     @NamedQuery(name = "Commande.findByIdcommande", query = "SELECT c FROM Commande c WHERE c.idcommande = :idcommande"),
     @NamedQuery(name = "Commande.findByDate", query = "SELECT c FROM Commande c WHERE c.date = :date"),
-    @NamedQuery(name = "Commande.findByUserid", query = "SELECT c FROM Commande c WHERE c.idutilisateur.idutilisateur = :idutilisateur")
+    @NamedQuery(name = "Commande.findByUserid", query = "SELECT c FROM Commande c WHERE c.idutilisateur.idutilisateur = :idutilisateur"),
+    @NamedQuery(name = "Commande.findByDealid", query = "SELECT c FROM Commande c WHERE c.iddeal.iddeal = :iddeal")
 })
 public class Commande implements Serializable {
     private static final long serialVersionUID = 1L;
