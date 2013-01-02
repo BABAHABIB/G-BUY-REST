@@ -26,6 +26,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("commandes")
 public class CommandeFacadeREST extends AbstractFacade<Commande> {
+
     @PersistenceContext(unitName = "G-BUY-RESTPU")
     private EntityManager em;
 
@@ -85,62 +86,63 @@ public class CommandeFacadeREST extends AbstractFacade<Commande> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-         /**
+
+    /**
      * Find By User Id
+     *
      * @param idutilisateur
-     * @return  List<Commande>
+     * @return List<Commande>
      */
     @GET
-    @Path("commande/{idutilisateur}")
+    @Path("utilisateur/{idutilisateur}")
     @Produces({"application/xml", "application/json"})
-    public List<Commande> findByUserid(@PathParam("idutilisateur") Integer idutilisateur){
+    public List<Commande> findByUserid(@PathParam("idutilisateur") Integer idutilisateur) {
         Query q = em.createNamedQuery("Commande.findByUserid");
         q.setParameter("idutilisateur", idutilisateur);
         List<Commande> list = q.getResultList();
-        
-        if(!list.isEmpty())
-        {
+
+        if (!list.isEmpty()) {
             return list;
         }
         return null;
     }
-    
-     /**
+
+    /**
      * Find By Deal Id
+     *
      * @param iddeal
-     * @return  List<Commande>
+     * @return List<Commande>
      */
     @GET
-    @Path("commande/deal/{iddeal}")
+    @Path("deal/{iddeal}")
     @Produces({"application/xml", "application/json"})
-    public List<Commande> findByDealid(@PathParam("iddeal") Integer id){
+    public List<Commande> findByDealid(@PathParam("iddeal") Integer id) {
         Query q = em.createNamedQuery("Commande.findByDealid");
         q.setParameter("iddeal", id);
         List<Commande> list = q.getResultList();
-        
-        if(!list.isEmpty())
-        {
+
+        if (!list.isEmpty()) {
             return list;
         }
         return null;
     }
-    
-                 /**
+
+    /**
      * Find By Deal Id
+     *
      * @param iddeal
-     * @return  List<Commande>
+     * @return List<Commande>
      */
     @GET
-    @Path("commande/count/{iddeal}")
+    @Path("count/{iddeal}")
     @Produces("text/plain")
-    public String countByDealid(@PathParam("iddeal") Integer id){
+    public String countByDealid(@PathParam("iddeal") Integer id) {
         Query q = em.createNamedQuery("Commande.findByDealid");
         q.setParameter("iddeal", id);
         List<Commande> list = q.getResultList();
-        
-        return String.valueOf( list.size());
-        
+
+        return String.valueOf(list.size());
+
     }
   
 }
