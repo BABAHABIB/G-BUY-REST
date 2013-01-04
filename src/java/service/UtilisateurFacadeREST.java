@@ -115,6 +115,26 @@ public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
     }
     
     /**
+     * 
+     * @param email
+     * @return utilisateur 
+     */
+    
+    @GET
+    @Path("utilisateur/{email}")
+    @Produces({"application/xml", "application/json"})
+    public Utilisateur findByEmail(@PathParam("email") String email){
+       Query q = em.createNamedQuery("Utilisateur.findByEmail");
+        q.setParameter("email", email);
+        List<Utilisateur> list = q.getResultList();
+        if(!list.isEmpty())
+        {
+            return list.get(0);
+        }
+        return null; 
+    }
+    
+    /**
      * Find By Id Parrain
      * @param idParrain
      * @return  List<Utilisateur>
