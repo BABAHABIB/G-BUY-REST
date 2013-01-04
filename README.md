@@ -8,7 +8,7 @@ EQUIPE
 
 - Nada BABAHABIB 
 - Anas KHABALI 
-- Yassin ELMAATAOUI 
+- Yassine ELMAATAOUI 
 - Nihad AMARA 
 
 ENCADRE PAR :
