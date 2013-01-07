@@ -34,7 +34,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("deals")
 public class DealFacadeREST extends AbstractFacade<Deal> {
-
+    
     @PersistenceContext(unitName = "G-BUY-RESTPU")
     private EntityManager em;
 
@@ -94,7 +94,7 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
     // methodes personnalisées
     /**
      * findByCategorie
@@ -246,9 +246,9 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
     @Produces({"application/xml", "application/json"})
     public List<Deal> findByDateAjout(@PathParam("date") String date) {
 
-        java.sql.Date d = java.sql.Date.valueOf(date);
+        //java.sql.Date d = java.sql.Date.valueOf(date);
         Query q = em.createNamedQuery("Deal.findByDateAjout");
-        q.setParameter("dateAjout", d);
+        q.setParameter("dateAjout", date);
         List<Deal> list = q.getResultList();
 
         if (!list.isEmpty() && list != null) {
@@ -279,7 +279,14 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
         if (!list.isEmpty() && list != null) {
             List<Deal> exp = new ArrayList<Deal>();
             for (Deal deal : list) {
-                if (deal.getDateExp().compareTo(aujourdhui) > 0 && deal.getDateExp().compareTo(lendemain) < 0 ) {
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+                Date dateExp = null;
+                try {
+                    dateExp = dateFormat.parse(deal.getDateExp());
+                } catch (ParseException ex) {
+                    Logger.getLogger(DealFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (dateExp.compareTo(aujourdhui) > 0 && dateExp.compareTo(lendemain) < 0 ) {
                     exp.add(deal);
                 }
 
@@ -291,4 +298,5 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
 
         return null;
     }
+    
 }

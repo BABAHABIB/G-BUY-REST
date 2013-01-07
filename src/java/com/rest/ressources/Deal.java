@@ -6,7 +6,6 @@ package com.rest.ressources;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,8 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -58,6 +55,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Deal.findRatingByDealId", query = "SELECT u FROM Deal d JOIN d.utilisateurCollection u WHERE  d.iddeal = :iddeal")
 })
 public class Deal implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "date_ajout")
+    private String dateAjout;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "date_exp")
+    private String dateExp;
     @Column(name = "Heur_exp")
     private Integer heurexp;
     @Column(name = "Minutes_exp")
@@ -86,16 +93,6 @@ public class Deal implements Serializable {
     @NotNull
     @Column(name = "prix")
     private double prix;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date_exp")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateExp;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date_ajout")
-    @Temporal(TemporalType.DATE)
-    private Date dateAjout;
     @Size(max = 45)
     @Column(name = "conditions")
     private String conditions;
@@ -143,7 +140,7 @@ public class Deal implements Serializable {
         this.iddeal = iddeal;
     }
 
-    public Deal(Integer iddeal, String titre, String description, double prixHabituel, double prix, Date dateExp, Date dateAjout) {
+    public Deal(Integer iddeal, String titre, String description, double prixHabituel, double prix, String dateExp, String dateAjout) {
         this.iddeal = iddeal;
         this.titre = titre;
         this.description = description;
@@ -191,22 +188,6 @@ public class Deal implements Serializable {
 
     public void setPrix(double prix) {
         this.prix = prix;
-    }
-
-    public Date getDateExp() {
-        return dateExp;
-    }
-
-    public void setDateExp(Date dateExp) {
-        this.dateExp = dateExp;
-    }
-
-    public Date getDateAjout() {
-        return dateAjout;
-    }
-
-    public void setDateAjout(Date dateAjout) {
-        this.dateAjout = dateAjout;
     }
 
     public String getConditions() {
@@ -363,6 +344,22 @@ public class Deal implements Serializable {
 
     public void setMinutesexp(Integer minutesexp) {
         this.minutesexp = minutesexp;
+    }
+
+    public String getDateAjout() {
+        return dateAjout;
+    }
+
+    public void setDateAjout(String dateAjout) {
+        this.dateAjout = dateAjout;
+    }
+
+    public String getDateExp() {
+        return dateExp;
+    }
+
+    public void setDateExp(String dateExp) {
+        this.dateExp = dateExp;
     }
     
 }

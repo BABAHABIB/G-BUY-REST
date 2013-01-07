@@ -6,7 +6,6 @@ package com.rest.ressources;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,8 +21,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -54,6 +51,9 @@ import javax.xml.bind.annotation.XmlTransient;
     
 })
 public class Utilisateur implements Serializable {
+    @Size(max = 45)
+    @Column(name = "date_naissance")
+    private String dateNaissance;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,9 +99,6 @@ public class Utilisateur implements Serializable {
     @Size(max = 45)
     @Column(name = "code_postale")
     private String codePostale;
-    @Column(name = "date_naissance")
-    @Temporal(TemporalType.DATE)
-    private Date dateNaissance;
     @Size(max = 45)
     @Column(name = "type")
     private String type;
@@ -212,14 +209,6 @@ public class Utilisateur implements Serializable {
         this.codePostale = codePostale;
     }
 
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
     public String getType() {
         return type;
     }
@@ -304,6 +293,14 @@ public class Utilisateur implements Serializable {
     @Override
     public String toString() {
         return "com.rest.ressources.Utilisateur[ idutilisateur=" + idutilisateur + " ]";
+    }
+
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
     
 }

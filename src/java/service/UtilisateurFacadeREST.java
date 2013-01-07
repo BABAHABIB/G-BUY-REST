@@ -27,6 +27,7 @@ import javax.ws.rs.QueryParam;
 @Stateless
 @Path("utilisateurs")
 public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
+
     @PersistenceContext(unitName = "G-BUY-RESTPU")
     private EntityManager em;
 
@@ -86,74 +87,64 @@ public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     // Méthodes personalisée 
-     
-    
     /**
-     * 
+     *
      * @param email
      * @param password
      * @return Utilisateur
      */
-    
     @GET
     @Path("verifieer")
     @Produces({"application/xml", "application/json"})
     public Utilisateur findByEmailPassword(@QueryParam("email") String email,
-                                           @QueryParam("password") String password)
-    {
+            @QueryParam("password") String password) {
         Query q = em.createNamedQuery("Utilisateur.findByEmailPassword");
         q.setParameter("email", email);
         q.setParameter("password", password);
-        List<Utilisateur> list =  q.getResultList();
-        if(!list.isEmpty())
-        {
-          return list.get(0);
-         }
+        List<Utilisateur> list = q.getResultList();
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
         return null;
     }
-    
+
     /**
-     * 
+     *
      * @param email
-     * @return utilisateur 
+     * @return utilisateur
      */
-    
     @GET
     @Path("utilisateur/{email}")
     @Produces({"application/xml", "application/json"})
-    public Utilisateur findByEmail(@PathParam("email") String email){
-       Query q = em.createNamedQuery("Utilisateur.findByEmail");
+    public Utilisateur findByEmail(@PathParam("email") String email) {
+        Query q = em.createNamedQuery("Utilisateur.findByEmail");
         q.setParameter("email", email);
         List<Utilisateur> list = q.getResultList();
-        if(!list.isEmpty())
-        {
+        if (!list.isEmpty()) {
             return list.get(0);
         }
-        return null; 
+        return null;
     }
-    
+
     /**
      * Find By Id Parrain
+     *
      * @param idParrain
-     * @return  List<Utilisateur>
+     * @return List<Utilisateur>
      */
     @GET
     @Path("parrainer/{id}")
     @Produces({"application/xml", "application/json"})
-    public List<Utilisateur> findByParrainId(@PathParam("id") Integer id){
+    public List<Utilisateur> findByParrainId(@PathParam("id") Integer id) {
         Query q = em.createNamedQuery("Utilisateur.findByParain");
         q.setParameter("parrainId", id);
         List<Utilisateur> list = q.getResultList();
-        
-        if(!list.isEmpty())
-        {
+
+        if (!list.isEmpty()) {
             return list;
         }
         return null;
     }
-        
-
-
 }

@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Anas-Yassine
+ * @author Anas
  */
 @Stateless
 @Path("commandes")
@@ -144,5 +144,5 @@ public class CommandeFacadeREST extends AbstractFacade<Commande> {
         return String.valueOf(list.size());
 
     }
-  
+    
 }

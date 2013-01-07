@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Anas-Yassine
+ * @author Anas
  */
 @Stateless
 @Path("bonachats")

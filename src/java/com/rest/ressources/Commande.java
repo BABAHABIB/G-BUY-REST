@@ -17,9 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -37,17 +36,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Commande.findByDealid", query = "SELECT c FROM Commande c WHERE c.iddeal.iddeal = :iddeal")
 })
 public class Commande implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "date")
+    private String date;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idcommande")
     private Integer idcommande;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date")
-    @Temporal(TemporalType.DATE)
-    private Date date;
     @JoinColumn(name = "idbon_achat", referencedColumnName = "idbon_achat")
     @ManyToOne
     private BonAchat idbonAchat;
@@ -65,7 +64,7 @@ public class Commande implements Serializable {
         this.idcommande = idcommande;
     }
 
-    public Commande(Integer idcommande, Date date) {
+    public Commande(Integer idcommande, String date) {
         this.idcommande = idcommande;
         this.date = date;
     }
@@ -76,14 +75,6 @@ public class Commande implements Serializable {
 
     public void setIdcommande(Integer idcommande) {
         this.idcommande = idcommande;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public BonAchat getIdbonAchat() {
@@ -133,6 +124,14 @@ public class Commande implements Serializable {
     @Override
     public String toString() {
         return "com.rest.ressources.Commande[ idcommande=" + idcommande + " ]";
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
     
 }
