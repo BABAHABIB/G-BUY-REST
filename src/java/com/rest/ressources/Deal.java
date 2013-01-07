@@ -58,6 +58,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Deal.findRatingByDealId", query = "SELECT u FROM Deal d JOIN d.utilisateurCollection u WHERE  d.iddeal = :iddeal")
 })
 public class Deal implements Serializable {
+    @Column(name = "Heur_exp")
+    private Integer heurexp;
+    @Column(name = "Minutes_exp")
+    private Integer minutesexp;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -343,6 +347,22 @@ public class Deal implements Serializable {
     @Override
     public String toString() {
         return "com.rest.ressources.Deal[ iddeal=" + iddeal + " ]";
+    }
+
+    public Integer getHeurexp() {
+        return heurexp;
+    }
+
+    public void setHeurexp(Integer heurexp) {
+        this.heurexp = heurexp;
+    }
+
+    public Integer getMinutesexp() {
+        return minutesexp;
+    }
+
+    public void setMinutesexp(Integer minutesexp) {
+        this.minutesexp = minutesexp;
     }
     
 }

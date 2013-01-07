@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -270,11 +271,15 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
 
         Query q = em.createNamedQuery("Deal.findAll");
         List<Deal> list = q.getResultList();
-        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        Date aujourdhui = new Date();
+        c.setTime(aujourdhui);
+        c.add(Calendar.DATE, 2);
+        Date lendemain = c.getTime();
         if (!list.isEmpty() && list != null) {
             List<Deal> exp = new ArrayList<Deal>();
             for (Deal deal : list) {
-                if (deal.getDateExp().compareTo(date) > 0) {
+                if (deal.getDateExp().compareTo(aujourdhui) > 0 && deal.getDateExp().compareTo(lendemain) < 0 ) {
                     exp.add(deal);
                 }
 
