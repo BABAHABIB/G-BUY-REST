@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -84,5 +85,21 @@ public class PrestataireFacadeREST extends AbstractFacade<Prestataire> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+    /**
+     * 
+     * @param nom
+     * @return 
+     */
+    @GET
+    @Path("prestataire/{nom}")
+    @Produces({"application/xml", "application/json"})
+    public Prestataire findByNom(@PathParam("nom") String nom) {
+        Query q = em.createNamedQuery("Prestataire.findByNom");
+        q.setParameter("nom", nom);
+        List<Prestataire> list = q.getResultList();
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
+    }
 }
