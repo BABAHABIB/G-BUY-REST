@@ -52,7 +52,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Deal.findByCadeau", query = "SELECT d FROM Deal d WHERE d.cadeau = :cadeau"),
     @NamedQuery(name = "Deal.findByIdCategorie", query = "SELECT d FROM Deal d WHERE d.categorie.idcategorie = :idcategorie"),
     @NamedQuery(name = "Deal.findByIdPrestataire", query = "SELECT d FROM Deal d WHERE d.prestataire.idprestataire = :prestataire"),
-    @NamedQuery(name = "Deal.findRatingByDealId", query = "SELECT u FROM Deal d JOIN d.utilisateurCollection u WHERE  d.iddeal = :iddeal")
+    @NamedQuery(name = "Deal.findRatingByDealId", query = "SELECT u FROM Deal d JOIN d.utilisateurCollection u WHERE d.iddeal = :iddeal"),
+    @NamedQuery(name = "Deal.findCommandeCollection", query = "SELECT c FROM Deal d JOIN d.commandeCollection c WHERE d.iddeal = :iddeal")
 })
 public class Deal implements Serializable {
     @Basic(optional = false)

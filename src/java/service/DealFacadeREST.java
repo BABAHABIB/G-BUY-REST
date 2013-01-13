@@ -4,7 +4,9 @@
  */
 package service;
 
+import com.rest.ressources.Commande;
 import com.rest.ressources.Deal;
+import com.rest.ressources.Utilisateur;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -233,6 +235,38 @@ public class DealFacadeREST extends AbstractFacade<Deal> {
         q.setParameter("iddeal", id);
         List<Deal> list = q.getResultList();
         return String.valueOf(list.size());
+    }
+    
+     /**
+     * finduserCollection
+     *
+     * @param id
+     * @return
+     */
+    @GET
+    @Path("users/{iddeal}")
+    @Produces({"application/xml", "application/json"})
+    public List<Utilisateur> findUserCollectionByIdDeal(@PathParam("iddeal") Integer id) {
+        Query q = em.createNamedQuery("Deal.findRatingByDealId");
+        q.setParameter("iddeal", id);
+        List<Utilisateur> list = q.getResultList();
+        return list;
+    }
+    
+      /**
+     * find Commande Collection
+     *
+     * @param id
+     * @return
+     */
+    @GET
+    @Path("commandes/{iddeal}")
+    @Produces({"application/xml", "application/json"})
+    public List<Commande> findCommandeCollectionByIdDeal(@PathParam("iddeal") Integer id) {
+        Query q = em.createNamedQuery("Deal.findCommandeCollection");
+        q.setParameter("iddeal", id);
+        List<Commande> list = q.getResultList();
+        return list;
     }
 
     /**

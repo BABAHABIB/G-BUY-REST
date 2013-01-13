@@ -4,6 +4,7 @@
  */
 package service;
 
+import com.rest.ressources.Deal;
 import com.rest.ressources.Utilisateur;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -141,6 +142,27 @@ public class UtilisateurFacadeREST extends AbstractFacade<Utilisateur> {
         Query q = em.createNamedQuery("Utilisateur.findByParain");
         q.setParameter("parrainId", id);
         List<Utilisateur> list = q.getResultList();
+
+        if (!list.isEmpty()) {
+            return list;
+        }
+        return null;
+    }
+    
+     /**
+     * Find Rated Deal
+     *
+     * @param idutilisateur
+     * @return List<Deal>
+     */
+    
+    @GET
+    @Path("rated/{id}")
+    @Produces({"application/xml", "application/json"})
+    public List<Deal> findRatedDealByUserId(@PathParam("id") Integer id) {
+        Query q = em.createNamedQuery("Utilisateur.findRatedDeal");
+        q.setParameter("idutilisateur", id);
+        List<Deal> list = q.getResultList();
 
         if (!list.isEmpty()) {
             return list;
